@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int x, n;
+    cout << "Numero que quiero buscar:" << endl;
+    cin >> x;
+    cout << "Ingrese la cantidad de numeros:" << endl;
+    cin >> n;
+    int num[n];
+    cout << "Ingresa los numeros de manera ascendente:" << endl;
+    for (int i = 0; i < n; i++) {
+        cin >> num[i];
+    }
+    if (num[0] == x) {
+        cout << "Esta en el indice 0" << endl;
+        return 0;
+    }
+    // Búsqueda exponencial
+    int i = 1;
+    while (i < n && num[i] <= x) {
+        i *= 2;
+    }
+    int sup = min(i, n - 1);
+    int inf = i / 2;
+    int indice = -1;
+
+    // Búsqueda binaria
+    while (inf <= sup) {
+        int mitad = (inf + sup) / 2;
+        if (num[mitad] == x) {
+            indice = mitad;
+            break;
+        }
+        if (num[mitad] > x) {
+            sup = mitad - 1;
+        } else {
+            inf = mitad + 1;
+        }
+    }
+    if (indice != -1) {
+        cout << "Indice: " << indice << endl;
+    } else {
+        cout << "Numero no encontrado" << endl;
+    }
+    return 0;
+}
